@@ -70,16 +70,5 @@ class Release(Command):
             raise Exception('`%s` failed...' % (test_cmd))
 
     @staticmethod
-    def _setup_py_path():
-        if not os.path.exists(Release._SETUP_PY):
-            raise IOError('Cannot find `%s` from current directory' % (Release._SETUP_PY))
-        p = os.path.abspath(Release._SETUP_PY)
-
-        if not os.access(p, os.X_OK):
-            raise OSError('`%s` is not executable' % (Release._SETUP_PY))
-
-        return p
-
-    @staticmethod
     def _msg(msg):
         sys.stderr.write(Release._MSG_PROMPT + msg)

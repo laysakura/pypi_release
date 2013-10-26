@@ -28,3 +28,12 @@ Author
 ======
 
 Sho Nakatani <lay.sakura@gmail.com>, a.k.a. @laysakura
+
+
+TODO
+====
+
+- version 番号置きたいのはsetup.pyだけではないよね
+  - がっつりMANIFESTに入ってるの全部舐めて，前後5行見せつつy/n打たせる?
+  - MANIFESTに入ってるのよりは，ユーザの予め指定したファイルってのほうが賢い
+- setup.pyにすらversionがセットされていないことがあるので，その場合には警告出そう．

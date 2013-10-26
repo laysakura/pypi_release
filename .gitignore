@@ -4,6 +4,7 @@ core
 
 .coverage
 .python-version
+*.egg
 dist/
 *.egg/
 *.egg-info/
