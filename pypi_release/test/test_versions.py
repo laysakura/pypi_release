@@ -13,7 +13,7 @@ def setup():
 
 
 def teardown():
-    print(ORIGIN_DIR)
+    os.chdir(ORIGIN_DIR)
 
 
 def test_get_current_version():
