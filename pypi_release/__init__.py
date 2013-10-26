@@ -10,8 +10,8 @@
 from distutils.cmd import Command
 import os
 import sys
-import shlex
-import subprocess
+import pypi_release.run_tests
+from pypi_release.versions import get_current_version
 
 
 class Release(Command):
@@ -27,7 +27,6 @@ class Release(Command):
     ]
     boolean_options = ['no-test']
 
-    _SETUP_PY   = 'setup.py'
     _MSG_PROMPT = '[release] '
 
     def initialize_options(self):
@@ -39,8 +38,8 @@ class Release(Command):
 
     def finalize_options(self):
         # changelogのフルパスセット
-        # next version を何とか探してきてセット
-        self.version = '10.0.0'
+
+        self.version = get_current_version()
 
         if not self.test_cmd:
             self.test_cmd = 'test'
@@ -51,7 +50,7 @@ class Release(Command):
         # run test
         Release._msg('Running tests with `%s` command...\n' % (self.test_cmd))
         if not self.no_test:
-            Release._run_test(self.test_cmd)
+            pypi_release.run_tests.run(self.test_cmd)
 
         # check next version
         Release._msg('Enter next version string [%s]: ' % self.version)
@@ -60,14 +59,6 @@ class Release(Command):
             self.version = v
 
         
-
-    # Helper functions
-    @staticmethod
-    def _run_test(test_cmd):
-        cmd = "%s %s" % (Release._setup_py_path(), test_cmd)
-        retcode = subprocess.call(shlex.split(cmd))
-        if retcode != 0:
-            raise Exception('`%s` failed...' % (test_cmd))
 
     @staticmethod
     def _msg(msg):
