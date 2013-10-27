@@ -14,6 +14,7 @@ setup(
     author_email     = 'lay.sakura@gmail.com',
     test_suite       = 'nose.collector',
     install_requires = [
+        'verlib',
         'nextversion',
     ],
     tests_require    = [
